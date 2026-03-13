@@ -1,4 +1,16 @@
+.venv/
 .venv
+node_modules/
+node_modules
+.next/
+.next
+dev/
+dev
+.git/
+.git
+.vscode/
+.vscode
 fit_test.json
 intersec_test.json
-.vscode
+*.txt
+*.csv
