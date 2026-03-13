@@ -1,52 +1,69 @@
+/* ═══════════════════════════════════════════
+   Apple Dark Mode — page.module.css
+   VISUAL LAYER ONLY — zero logic changes
+   ═══════════════════════════════════════════ */
+
+/* ─── Layout Shell ─── */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 4rem 2rem;
+  padding: 5rem 2rem 6rem;
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
 }
 
+/* ─── Header ─── */
 .header {
   text-align: center;
-  margin-bottom: 3rem;
-  animation: fadeInDown 0.8s ease-out forwards;
+  margin-bottom: 3.5rem;
+  animation: fadeInDown 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .title {
-  font-size: 3rem;
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
   font-weight: 700;
-  background: linear-gradient(135deg, #58a6ff 0%, #a371f7 100%);
+  letter-spacing: -0.04em;
+  background: linear-gradient(135deg, #FFFFFF 0%, rgba(235, 235, 245, 0.6) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 1rem;
+  background-clip: text;
+  margin-bottom: 0.875rem;
+  line-height: 1.1;
 }
 
 .subtitle {
-  font-size: 1.125rem;
+  font-size: 1.0625rem;
+  font-weight: 400;
   color: var(--text-secondary);
-  max-width: 600px;
-  line-height: 1.6;
+  max-width: 520px;
+  line-height: 1.65;
+  margin: 0 auto;
 }
 
+/* ─── Search / Input Card (Glass Material) ─── */
 .searchBox {
   width: 100%;
-  max-width: 800px;
-  background: var(--panel-bg);
-  border: 1px solid var(--panel-border);
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  max-width: 780px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 2.25rem 2.5rem;
+  box-shadow:
+    0 0 0 0.5px var(--border-subtle),
+    0 20px 60px rgba(0, 0, 0, 0.55),
+    0 4px 16px rgba(0, 0, 0, 0.35);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  animation: fadeInUp 0.8s ease-out 0.2s forwards;
+  animation: fadeInUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
   opacity: 0;
 }
 
+/* ─── Input Groups ─── */
 .inputGroup {
   display: flex;
   flex-direction: column;
@@ -55,183 +72,237 @@
 
 .inputLabel {
   font-weight: 500;
-  font-size: 0.9rem;
-  color: var(--text-primary);
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
 }
 
-.inputField {
+.inputField,
+.selectField {
   width: 100%;
-  padding: 1rem 1.25rem;
-  background: rgba(13, 17, 23, 0.8);
-  border: 1px solid var(--panel-border);
-  border-radius: 8px;
+  padding: 0.9rem 1.125rem;
+  background: var(--surface-01);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
   color: var(--text-primary);
-  font-size: 1rem;
-  transition: all 0.2s ease;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
 
 .selectField {
-  width: 100%;
-  padding: 1rem 1.25rem;
-  background: rgba(13, 17, 23, 0.8);
-  border: 1px solid var(--panel-border);
-  border-radius: 8px;
-  color: var(--text-primary);
-  font-size: 1rem;
-  transition: all 0.2s ease;
   appearance: none;
   cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23636366' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+.inputField::placeholder {
+  color: var(--text-tertiary);
+  font-size: 0.875rem;
 }
 
 .inputField:focus,
 .selectField:focus {
   outline: none;
   border-color: var(--accent-color);
-  box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.2);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+  background: var(--surface-02);
 }
 
+.inputField:disabled,
+.selectField:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ─── Option text inside select ─── */
+.selectField option {
+  background: var(--surface-01);
+  color: var(--text-primary);
+}
+
+/* ─── Buttons ─── */
 .buttonContainer {
   display: flex;
   justify-content: flex-end;
+  gap: 0.75rem;
 }
 
 .primaryButton {
   background: var(--accent-color);
   color: #fff;
   border: none;
-  padding: 0.875rem 2rem;
-  border-radius: 8px;
-  font-size: 1rem;
+  padding: 0.8125rem 1.875rem;
+  border-radius: 12px;
+  font-size: 0.9375rem;
   font-weight: 600;
+  letter-spacing: -0.01em;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background 0.18s ease, transform 0.15s ease, box-shadow 0.18s ease, opacity 0.18s ease;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.primaryButton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.12), transparent);
+  border-radius: inherit;
+  pointer-events: none;
 }
 
 .primaryButton:hover:not(:disabled) {
   background: var(--accent-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(88, 166, 255, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(10, 132, 255, 0.4);
+}
+
+.primaryButton:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .primaryButton:disabled {
-  opacity: 0.6;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
 .secondaryButton {
-  background: transparent;
+  background: var(--surface-02);
   color: var(--text-primary);
-  border: 1px solid var(--panel-border);
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  font-size: 0.9rem;
+  border: 1px solid var(--border-subtle);
+  padding: 0.75rem 1.375rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.15s ease;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
 .secondaryButton:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: var(--text-secondary);
+  background: var(--surface-03);
+  border-color: #636366;
+  transform: translateY(-1px);
 }
 
+.secondaryButton:active {
+  transform: translateY(0);
+}
+
+/* ─── Error Box ─── */
 .errorBox {
-  background: rgba(248, 81, 73, 0.1);
-  border: 1px solid rgba(248, 81, 73, 0.4);
-  border-radius: 8px;
-  padding: 1rem;
-  margin-top: 1.5rem;
+  background: var(--error-bg);
+  border: 1px solid var(--error-border);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  animation: popIn 0.3s ease-out;
+  gap: 0.375rem;
+  animation: popIn 0.25s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .errorTitle {
   color: var(--error-color);
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.9375rem;
+  letter-spacing: -0.01em;
 }
 
 .errorText {
   color: var(--text-secondary);
   font-size: 0.875rem;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
+/* ─── Loader ─── */
 .loaderContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 4rem 0;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid rgba(88, 166, 255, 0.2);
+  width: 36px;
+  height: 36px;
+  border: 2.5px solid rgba(10, 132, 255, 0.18);
   border-radius: 50%;
   border-top-color: var(--accent-color);
-  animation: spin 1s linear infinite;
+  animation: spin 0.85s linear infinite;
 }
 
 .loaderText {
   color: var(--text-secondary);
-  font-size: 1.1rem;
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  animation: pulse 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+/* ─── Results Section (Glass Card) ─── */
 .resultsSection {
   width: 100%;
   max-width: 1000px;
   margin-top: 3rem;
-  background: var(--panel-bg);
-  border: 1px solid var(--panel-border);
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  animation: fadeInUp 0.5s ease-out forwards;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 2rem 2.25rem;
+  box-shadow:
+    0 0 0 0.5px var(--border-subtle),
+    0 20px 60px rgba(0, 0, 0, 0.5);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  animation: fadeInUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .resultsHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.75rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid var(--panel-border);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .resultsTitle {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 600;
+  letter-spacing: -0.02em;
   color: var(--text-primary);
 }
 
 .resultsCount {
-  background: rgba(88, 166, 255, 0.1);
+  display: inline-flex;
+  align-items: center;
+  background: rgba(10, 132, 255, 0.14);
   color: var(--accent-color);
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  font-size: 0.875rem;
+  padding: 0.2rem 0.625rem;
+  border-radius: 20px;
+  font-size: 0.8125rem;
   font-weight: 600;
-  margin-left: 0.75rem;
+  margin-left: 0.625rem;
+  border: 1px solid rgba(10, 132, 255, 0.25);
 }
 
+/* ─── Data Table ─── */
 .tableContainer {
   overflow-x: auto;
-  border-radius: 8px;
-  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
 }
 
 .dataTable {
@@ -241,80 +312,72 @@
 }
 
 .dataTable th {
-  background: rgba(22, 27, 34, 0.8);
-  padding: 1rem;
-  font-weight: 600;
-  font-size: 0.875rem;
+  background: rgba(28, 28, 30, 0.9);
+  padding: 0.875rem 1rem;
+  font-weight: 500;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
   color: var(--text-secondary);
-  border-bottom: 1px solid var(--panel-border);
+  border-bottom: 1px solid var(--border-subtle);
   white-space: nowrap;
 }
 
+.dataTable th:first-child { border-radius: 12px 0 0 0; }
+.dataTable th:last-child  { border-radius: 0 12px 0 0; }
+
 .dataTable td {
-  padding: 1rem;
+  padding: 0.9rem 1rem;
   font-size: 0.9rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   color: var(--text-primary);
+  transition: background 0.12s ease;
+  vertical-align: middle;
 }
 
 .dataTable tr:last-child td {
   border-bottom: none;
 }
 
-.dataTable tr:hover td {
-  background: rgba(255, 255, 255, 0.02);
+.dataTable tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .emptyCell {
-  color: var(--text-secondary);
-  font-style: italic;
+  color: var(--text-tertiary);
+  font-style: normal;
+  font-size: 0.875rem;
 }
 
-/* Animations */
+/* ─── Animations ─── */
 @keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-18px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }
 
 @keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.45; }
 }
 
 @keyframes popIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 640px) {
+  .searchBox   { padding: 1.5rem 1.25rem; border-radius: 16px; }
+  .buttonContainer { justify-content: stretch; }
+  .primaryButton   { width: 100%; justify-content: center; }
+  .resultsHeader   { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
 }
